@@ -46,8 +46,8 @@ SingleTrackAcado::SingleTrackAcado(double mass, double wheel_base, double I_z, d
     F_rear_y = C_lat* atan(((this->wheel_base - this->l_front) * yaw_rate - velocity_y) / (log(exp(2 * velocity_x) + 1) - velocity_x));
 
 
-    f << dot(trans_x) == velocity_x - yaw_rate * trans_y;
-    f << dot(trans_y) == velocity_y + yaw_rate * trans_x;
+    f << dot(trans_x) == velocity_x * cos(yaw) - velocity_y * sin(yaw);
+    f << dot(trans_y) == velocity_x * sin(yaw) + velocity_y * cos(yaw);
     f << dot(yaw) == yaw_rate;
 
     //linear
